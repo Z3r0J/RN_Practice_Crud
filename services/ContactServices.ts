@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import { useState } from "react";
 
 export const InsertContact = async (db:any,contact:Contact) => {
@@ -10,11 +11,10 @@ export const getAllContact = async (db:any)=>{
     const query = `SELECT * FROM CONTACTS`;
 
     const response = await db.executeSql(query);
-
     response.forEach((res:any) => {
         for (let index = 0; index < res.rows.length; index++) {
-            const contact:Contact = {id:res.rows.item(index).id,name:res.rows.item(index).name,phone:res.rows.item(index).phone};
-            contacts.push(contact);
+            const contact:Contact ={id:res.rows.item(index)["id"],name:res.rows.item(index)["name"],phone:res.rows.item(index)["phone"]}; 
+            contacts.push(contact)
         }
     });
     
@@ -34,7 +34,7 @@ export const getById = async (db:any, contactId:any) => {
 
 export const UpdateContact = async(db:any,newContactInfo:Contact, contactId:number) => {
 
-    const query = `UPDATE CONTACTS SET name = ${newContactInfo.name}, phone = ${newContactInfo.phone} WHERE id = ${contactId}`;
+    const query = `UPDATE CONTACTS SET name = '${newContactInfo.name}', phone = '${newContactInfo.phone}'  WHERE id = ${contactId}`;
 
     return await db.executeSql(query);
 
