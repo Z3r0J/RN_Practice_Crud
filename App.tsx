@@ -16,7 +16,7 @@ import {
 import {useEffect} from 'react';
 import {useColorScheme} from 'react-native';
 import {NavigationDrawer} from './components/navigation/NavigationDrawer';
-import {initializeDatabase} from './services/db';
+import {initializeDatabase} from './src/services/db';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
